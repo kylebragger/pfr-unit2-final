@@ -1,5 +1,7 @@
 Shouter::Application.routes.draw do
   
+  resources :users
+  
   root to: 'pages#home'
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
