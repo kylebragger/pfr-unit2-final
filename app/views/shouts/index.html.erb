@@ -1,0 +1,8 @@
+<% for shout in @shouts %>
+<div id="shout-<%= shout.id %>">
+    <p><%= shout.user_id %>: <%= shout.content %></p>
+    <p>posted <%= time_ago_in_words shout.created_at %> ago</p>
+</div>
+<% end %>
+
+<%= will_paginate @shouts %>
