@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
+  # allow mass assignment for the following fields:
   attr_accessible :email, :password_digest, :username
   
+  # validations
   validates :email, :username, presence: true, uniqueness: { case_sensitive: false }
   validates :password_digest, presence: { on: :create }, length: { minimum: 6 }
   validates :username, length: { in: 1..40 }
@@ -8,10 +10,15 @@ class User < ActiveRecord::Base
   validates :username, format: /\A([a-z])([_a-z]*)\z/i
   validate :check_reserved_usernames
   
+  # methods after this keyword will be protected methods
   protected
   
+  # this is a custom validation method which will add an error to the username attribute
+  # if the username is reserved (that is, if the username is not allowed).
+  #
+  # note that the check is case insensitive.
   def check_reserved_usernames
     reserved = %w{admin kyle leo}
-    self.errors.add(:username, 'is not allowed') if reserved.include?(self.username.downcase)
+    self.errors.add(:username, 'is not allowed') if reserved.include?(self.username.downcase.strip)
   end
 end
