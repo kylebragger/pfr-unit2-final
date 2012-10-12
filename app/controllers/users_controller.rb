@@ -57,19 +57,20 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
+    
+    @user.attributes = params[:user]
+    
+    # upload the user's cover image, if present
+    if @user.profile_image_file.present?
+      # move the file to public/
+      FileUtils.mv(@user.profile_image_file.tempfile, "public/#{@user.profile_image_file.original_filename}")
+      
+      # store the filename
+      @user.profile_image = @user.profile_image_file.original_filename
+    end
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
-        
-        # upload the user's cover image, if present
-        if @user.profile_image_file.present?
-          # move the file to public/
-          FileUtils.mv(@user.profile_image_file.tempfile, "public/#{@user.profile_image_file.original_filename}")
-          
-          # store the filename
-          @user.profile_image = @user.profile_image_file.original_filename
-        end
-        
+      if @user.save
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else

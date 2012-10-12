@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-ID: <%= @user.id %><br>
-Email: <%= @user.email %><br>
-Username: <%= @user.username %><br>
+<div style="background-color: #<%= @user.profile_bg %>; color: #<%= @user.profile_fg %>; padding: 25px">
+    <%= image_tag('/' + @user.profile_image, width: 300) if @user.profile_image.present? %>
+    
+    <h1><%= @user.username %></h1>
+    
+    ID: <%= @user.id %><br>
+    Email: <%= @user.email %><br>
+</div>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
