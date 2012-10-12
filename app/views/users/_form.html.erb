@@ -21,9 +21,28 @@
         <%= f.text_field :username %>
     </div>
 
+    <% if @user.new_record? %>
     <div>
         <%= f.label :password_digest, 'Password' %><br>
         <%= f.password_field :password_digest %>
+    </div>
+    <% end %>
+    
+    Profile:
+    
+    <div>
+        <%= f.label :profile_bg, 'Background' %><br>
+        #<%= f.text_field :profile_bg %>
+    </div>
+    
+    <div>
+        <%= f.label :profile_fg, 'Text' %><br>
+        #<%= f.text_field :profile_fg %>
+    </div>
+    
+    <div>
+        <%= f.label :profile_image_file, 'Cover Image' %><br>
+        <%= f.file_field :profile_image_file %>
     </div>
 
   <div class="actions">
