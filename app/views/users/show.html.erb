@@ -3,7 +3,7 @@
 <div style="background-color: #<%= @user.profile_bg %>; color: #<%= @user.profile_fg %>; padding: 25px">
     <%= image_tag('/' + @user.profile_image, width: 300) if @user.profile_image.present? %>
     
-    <h1><%= @user.username %></h1>
+    <h1><%= "<u>#{@user.username}</u>".html_safe %></h1>
     
     ID: <%= @user.id %><br>
     Email: <%= @user.email %><br>
