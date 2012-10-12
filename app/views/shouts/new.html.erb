@@ -1,8 +1,12 @@
 <h1>New Shout</h1>
+
 <%= form_for @shout do |f| %>
 <div>
     <%= f.label :content, 'Say Something' %><br>
     <%= f.text_area :content, rows: 3 %>
+    <% if @shout.errors.any? %>
+    <br><strong>Oops!</strong> Content <%= @shout.errors[:content].to_sentence %>
+    <% end %>
 </div>
 <div>
     <%= f.button 'Shout!' %>
