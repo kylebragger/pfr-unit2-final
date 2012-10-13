@@ -1,0 +1,7 @@
+<h1>Shouts tagged <%= params[:name] %></h1>
+
+<% if @shouts.any? %>
+<%= render 'shouts/shouts' %>
+<% else %>
+None :(
+<% end %>

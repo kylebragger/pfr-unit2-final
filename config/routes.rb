@@ -7,6 +7,8 @@ Shouter::Application.routes.draw do
   post 'follow', to: 'follows#create', as: :follow
   delete 'unfollow', to: 'follows#destroy', as: :unfollow
   
+  get 'tags/:name', to: 'tags#show', as: :tag
+  
   root to: 'pages#home'
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
