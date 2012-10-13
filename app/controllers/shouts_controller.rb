@@ -14,6 +14,11 @@ class ShoutsController < ApplicationController
   end
   
   def index
-    @shouts = Shout.order('created_at DESC').paginate(:per_page => 20, :page => params[:page])
+    if params[:from].to_s.downcase.strip == 'followed'
+      user_ids = [User.first.id] + User.first.follows.collect(&:id)
+      @shouts = Shout.where('user_id IN (?)', user_ids.uniq).paginate(:per_page => 20, :page => params[:page])
+    else
+      @shouts = Shout.order('created_at DESC').paginate(:per_page => 20, :page => params[:page])
+    end
   end
 end
