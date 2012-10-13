@@ -14,6 +14,12 @@ class User < ActiveRecord::Base
   
   # associations
   has_many :shouts, dependent: :destroy, order: 'created_at DESC'
+  has_many :follows, dependent: :destroy, order: 'id DESC', class_name: 'Follow', foreign_key: 'user_id'
+  has_many :followers, dependent: :destroy, order: 'id DESC', class_name: 'Follow', foreign_key: 'follow_id'
+
+  def follows?(user)
+    Follow.exists?(user_id: self.id, follow_id: user.id)
+  end
 
   # methods after this keyword will be protected methods
   protected
