@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013190322) do
+ActiveRecord::Schema.define(:version => 20121013211922) do
 
   create_table "follows", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -30,6 +30,19 @@ ActiveRecord::Schema.define(:version => 20121013190322) do
   end
 
   add_index "shouts", ["user_id"], :name => "index_shouts_on_user_id"
+
+  create_table "shouts_tags", :force => true do |t|
+    t.integer "tag_id"
+    t.integer "shout_id"
+  end
+
+  add_index "shouts_tags", ["shout_id", "tag_id"], :name => "index_shouts_tags_on_shout_id_and_tag_id"
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                              :null => false

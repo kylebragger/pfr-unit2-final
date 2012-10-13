@@ -1,7 +1,7 @@
 <% for shout in @shouts %>
 <div id="shout-<%= shout.id %>">
     <p><%= shout.user.username %>: <%= shout.content %></p>
-    <p>posted <%= shout_date shout %></p>
+    <p>posted <%= shout_date shout %> <% if shout.tags.any? %>| Tags: <%= shout.tags.collect(&:name).join(' ') %><% end %></p>
 </div>
 <% end %>
 

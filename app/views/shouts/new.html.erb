@@ -3,7 +3,8 @@
 <%= form_for @shout do |f| %>
 <div>
     <%= f.label :content, 'Say Something' %><br>
-    <%= f.text_area :content, rows: 3 %>
+    <%= f.text_area :content, rows: 3 %><br>
+    <%= f.text_field :tag_string, placeholder: 'Type single word tags here' %>
     <% if @shout.errors.any? %>
     <br><strong>Oops!</strong> Content <%= @shout.errors[:content].to_sentence %>
     <% end %>
