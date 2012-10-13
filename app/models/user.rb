@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   validates :email, format: /@/
   validates :username, format: /\A([a-z])([_a-z0-9]*)\z/i
   validate :check_reserved_usernames
+  
+  # associations
+  has_many :shouts, dependent: :destroy, order: 'created_at DESC'
 
   # methods after this keyword will be protected methods
   protected

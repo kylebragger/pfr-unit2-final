@@ -9,5 +9,9 @@
     Email: <%= @user.email %><br>
 </div>
 
+<h2><%= @user.username %>'s Shouts</h2>
+
+<%= render partial: 'shouts/shouts' %>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

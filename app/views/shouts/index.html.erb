@@ -1,11 +1,4 @@
 <h1>All Shouts</h1>
 <p><%= link_to '+ Post a Shout', new_shout_path %></p>
 
-<% for shout in @shouts %>
-<div id="shout-<%= shout.id %>">
-    <p><%= shout.user_id %>: <%= shout.content %></p>
-    <p>posted <%= shout_date shout %></p>
-</div>
-<% end %>
-
-<%= will_paginate @shouts %>
+<%= render partial: 'shouts/shouts' %>

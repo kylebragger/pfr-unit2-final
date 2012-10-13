@@ -5,7 +5,7 @@ class ShoutsController < ApplicationController
   
   def create
     @shout = Shout.new(params[:shout])
-    @shout.user_id = -1 # we will come back to this later
+    @shout.user = User.first
     if @shout.save
       redirect_to shouts_path
     else
