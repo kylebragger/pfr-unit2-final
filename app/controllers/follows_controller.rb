@@ -5,10 +5,10 @@ class FollowsController < ApplicationController
       @followed_user = User.find(params[:follow])
       raise if @user == @followed_user # don't let users follow themselves
       Follow.create user: @user, follow: @followed_user
+#      Follow.create
       redirect_to user_path(@followed_user), notice: 'Followed ' + @followed_user.username
-    rescue
-      # assume they are already following
-      redirect_to user_path(@followed_user)
+    rescue => e
+      logger.debug e.message
     end
   end
   
@@ -18,8 +18,8 @@ class FollowsController < ApplicationController
       @followed_user = User.find(params[:follow])
       Follow.find_by_user_id_and_follow_id(@user.id, @followed_user.id).destroy
       redirect_to user_path(@followed_user), notice: 'Unfollowed ' + @followed_user.username
-    rescue
-      redirect_to user_path(@followed_user)
+    rescue => e
+      logger.debug e.message
     end
   end
 end
