@@ -16,7 +16,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find_by_username(params[:username])
+    # fall back to find by ID
+    @user = User.find_by_username(params[:username]) || User.find(params[:username])
     
     @shouts = @user.shouts.paginate(per_page: 20, page: params[:page])
 

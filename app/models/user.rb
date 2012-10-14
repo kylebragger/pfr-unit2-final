@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
     Follow.exists?(user_id: self.id, follow_id: user.id)
   end
 
+  def to_param
+    self.username
+  end
+
   # methods after this keyword will be protected methods
   protected
 
