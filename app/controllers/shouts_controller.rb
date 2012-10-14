@@ -7,8 +7,10 @@ class ShoutsController < ApplicationController
     @shout = Shout.new(params[:shout])
     @shout.user = User.first
     if @shout.save
+      logger.info "#{@shout.user.username} just posted a shout: #{@shout.content}"
       redirect_to shouts_path
     else
+      logger.fatal "#{@shout.errors.inspect}"
       render :new
     end
   end
