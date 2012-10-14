@@ -30,6 +30,6 @@ class User < ActiveRecord::Base
   # note that the check is case insensitive.
   def check_reserved_usernames
     reserved = %w{admin kyle leo}
-    self.errors.add(:username, 'is not allowed') if reserved.include?(self.username.downcase.strip)
+    self.errors.add(:username, 'is not allowed') if reserved.include?(self.username.to_s.downcase.strip)
   end
 end
