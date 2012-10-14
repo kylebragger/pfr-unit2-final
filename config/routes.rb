@@ -1,6 +1,8 @@
 Shouter::Application.routes.draw do
   
-  resources :users
+  resources :users, except: [:new, :show]
+  get 'signup', to: 'users#new', as: :new_user
+  get 'profile/:username', to: 'users#show', as: :user
   
   resources :shouts
   
@@ -8,6 +10,10 @@ Shouter::Application.routes.draw do
   delete 'unfollow', to: 'follows#destroy', as: :unfollow
   
   get 'tags/:name', to: 'tags#show', as: :tag
+  
+  get 'login', to: 'sessions#new', as: :login
+  delete 'logout', to: 'sessions#destroy', as: :logout
+  post 'auth', to: 'sessions#create', as: :auth
   
   root to: 'pages#home'
 

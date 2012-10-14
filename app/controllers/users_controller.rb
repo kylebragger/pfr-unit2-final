@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_filter :require_user, only: [:edit, :update, :destroy]
+  before_filter :require_no_user, only: [:new, :create]
+  
   # GET /users
   # GET /users.json
   def index
@@ -13,7 +16,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:username])
     
     @shouts = @user.shouts.paginate(per_page: 20, page: params[:page])
 
@@ -46,6 +49,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        session[:user_id] = @user.id
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else

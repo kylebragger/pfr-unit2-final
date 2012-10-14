@@ -1,11 +1,12 @@
 class ShoutsController < ApplicationController
+  before_filter :require_user, only: [:new, :create]
+  
   def new
     @shout = Shout.new
   end
   
   def create
-    @shout = Shout.new(params[:shout])
-    @shout.user = User.first
+    @shout = current_user.shouts.new(params[:shout])
     if @shout.save
       logger.info "#{@shout.user.username} just posted a shout: #{@shout.content}"
       redirect_to shouts_path

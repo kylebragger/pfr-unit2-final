@@ -1,0 +1,15 @@
+<h1>Log in</h1>
+<% if @error %><p>Couldn't log you in.</p><% end %>
+<%= form_tag auth_path do %>
+<div>
+    Username/Email:
+    <%= text_field_tag :username_or_email, params[:username_or_email] %>
+</div>
+<div>
+    Password:
+    <%= password_field_tag :password %>
+</div>
+<div>
+    <%= submit_tag 'Log in' %>
+</div>
+<% end %>
